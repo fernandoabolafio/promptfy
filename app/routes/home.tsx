@@ -5,8 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/com
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "Promptfy - Interactive Prompt Builder" },
-    { name: "description", content: "Build better prompts with our 3 proven methodologies" },
+    { title: "Promptfy - Stop Wrestling with AI, Start Directing It" },
+    { name: "description", content: "Three battle-tested methodologies to get AI doing exactly what you want, when you want it" },
   ];
 }
 
@@ -14,21 +14,21 @@ const promptTypes = [
   {
     id: "diverge",
     name: "Diverge",
-    description: "Exploring alternative implementations by letting the AI propose feature designs without preconceptions, to discover fresh directions before converging",
+    description: "Break out of tunnel vision. Let AI explore the solution space without your assumptions, then pick the best path from approaches you'd never consider.",
     icon: "/diverge.svg",
     path: "/diverge"
   },
   {
     id: "tracer-bullet",
-    name: "Tracer bullet",
-    description: "A minimal, but fully functional, end-to-end slice of a system's architecture",
+    name: "Tracer bullet", 
+    description: "You code the seed, AI grows the tree. Show your architectural vision with working code, then get systematic help expanding it.",
     icon: "/tracerbullet.svg",
     path: "/tracer-bullet"
   },
   {
     id: "agent-planning",
     name: "Agent planning",
-    description: "Collaborative planning with agents through high-level specs and mini-ADRs. TL;DR: lightweight architectural decisions captured before coding begins.",
+    description: "Plan first, code later. Iterate on markdown specs instead of regenerating code files. Catch blind spots before they become expensive bugs.",
     icon: "/plan.svg",
     path: "/agent-planning"
   }
@@ -93,16 +93,17 @@ export default function Home() {
             Promptfy
           </motion.h1>
           <motion.p 
-            className="text-lg text-muted-foreground/80 mb-12 font-light"
+            className="text-xl text-muted-foreground/80 mb-8 font-light"
             variants={itemVariants}
           >
-            Interactive Prompt Builder
+            Stop wrestling with AI, start directing it
           </motion.p>
           <motion.p 
-            className="text-base text-muted-foreground max-w-xl mx-auto leading-relaxed"
+            className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed"
             variants={itemVariants}
           >
-            Choose from 3 proven methodologies to build better AI interactions
+            Three battle-tested methodologies that turn vague AI conversations into precise, actionable results. 
+            Pick your approach based on what you're trying to achieve.
           </motion.p>
         </motion.div>
         
