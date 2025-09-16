@@ -124,11 +124,13 @@ export default function AgentPlanning() {
             </CardHeader>
             <CardContent>
               <CardDescription className="text-base leading-relaxed text-muted-foreground/90">
-                Agent planning enables collaborative planning with AI agents through high-level specifications and mini-ADRs 
-                (Architecture Decision Records). This methodology focuses on capturing lightweight architectural decisions 
-                before coding begins, ensuring alignment between human intent and AI implementation. It's ideal for complex 
-                projects where upfront planning prevents costly refactoring and ensures the AI understands both the technical 
-                requirements and the reasoning behind architectural choices.
+                Ever notice how you start coding with confidence, then hit those murky decisions that slow you down? Agent planning flips the script. Instead of generating mountains of code just to give AI feedback, you collaborate on a lightweight markdown spec first. The AI challenges your assumptions, surfaces edge cases you'd normally skip when the implementation gets messy, and helps you think through the grey areas before they become expensive problems.
+                
+                <div className="mt-6 space-y-3">
+                  <div>• <strong>When to use:</strong> Complex features with unclear technical decisions or multiple implementation paths</div>
+                  <div>• <strong>Why it works:</strong> Faster to iterate on specs than regenerate code; AI catches blind spots you'd miss</div>
+                  <div>• <strong>Skip it when:</strong> Building simple CRUD operations, components, and other pattenrs you already can reference from your codebase. Or when exploring new ideas and you're not sure how to implement them.</div>
+                </div>
               </CardDescription>
             </CardContent>
           </Card>
