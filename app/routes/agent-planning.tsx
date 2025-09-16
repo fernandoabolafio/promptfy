@@ -36,10 +36,10 @@ export default function AgentPlanning() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      goal: "",
-      certainParts: "",
-      uncertainParts: "",
-      uxPreferences: "",
+      goal: "Build a recipe sharing app where people can upload their recipes and others can rate them and leave comments",
+      certainParts: "- users need to sign up/login obviously\n- recipe form with title, ingredients, steps\n- photo upload for the dish\n- rating system (1-5 stars)\n- comments section\n- search by ingredients or recipe name\n- maybe categories like desserts, main course etc",
+      uncertainParts: "- not sure if we should allow video uploads or just photos?\n- how to handle recipe scaling (like double the recipe automatically)?\n- should there be user profiles with their own recipe collections?\n- moderation system for inappropriate content??\n- maybe some kind of meal planning feature but idk",
+      uxPreferences: "- keep it simple and clean, not too cluttered\n- mobile first since people cook with their phones\n- nice big photos of food (instagram vibes)\n- easy to scroll through recipes\n- don't make the upload process too complicated or people won't use it",
     },
   });
 
@@ -50,30 +50,21 @@ export default function AgentPlanning() {
   };
 
   const generateAgentPlanningPrompt = (values: FormValues) => {
-    let prompt = `# Agent Planning Session\n\n`;
-    
-    prompt += `## Project Goal\n${values.goal}\n\n`;
+    let prompt = `Implement the following:\n${values.goal}\n\n`;
     
     if (values.certainParts) {
-      prompt += `## What I'm Sure About\n${values.certainParts}\n\n`;
+      prompt += `What I know and I'd like you to follow:\n${values.certainParts}\n\n`;
     }
     
     if (values.uncertainParts) {
-      prompt += `## Areas Where I Need Input\n${values.uncertainParts}\n\n`;
+      prompt += `What I don't know and I'd like you to create a 'mini ADR' for each - to quickly decide on the best path:\n${values.uncertainParts}\n\n`;
     }
     
     if (values.uxPreferences) {
-      prompt += `## UX/UI Preferences\n${values.uxPreferences}\n\n`;
+      prompt += `Some preferences you should follow:\n${values.uxPreferences}\n\n`;
     }
     
-    prompt += `## Instructions for Agent\n`;
-    prompt += `Please help me plan this project by:\n`;
-    prompt += `1. Creating a high-level architecture overview\n`;
-    prompt += `2. Identifying key technical decisions that need to be made\n`;
-    prompt += `3. Suggesting a development roadmap with phases\n`;
-    prompt += `4. Highlighting potential challenges and mitigation strategies\n`;
-    prompt += `5. Creating mini-ADRs (Architecture Decision Records) for major technical choices\n\n`;
-    prompt += `Focus on collaborative planning where we can iterate on the approach together.`;
+    prompt += `Before proceeding, ask me clarifying questions. Write the high-level specs into a markdown file, to which I will have to agree before proceeding into implementation.\nIn the markdown file, make sure to include text mocks of the UIs, if applicable for the feature.`;
     
     return prompt;
   };
@@ -143,11 +134,13 @@ export default function AgentPlanning() {
           </Card>
         </motion.div>
 
-        {/* Form */}
+        {/* Form and Prompt Side by Side */}
         <motion.div
           variants={cardVariants}
           custom={1}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-8"
         >
+          {/* Form Panel */}
           <Card className="border-0 shadow-sm bg-background/50 backdrop-blur-sm">
             <CardHeader className="pb-4">
               <CardTitle className="text-xl font-medium font-mono tracking-tight">Build Your Agent Planning Prompt</CardTitle>
@@ -194,7 +187,7 @@ export default function AgentPlanning() {
 • Real-time notifications for task updates
 • Team invitation system with role-based permissions
 • Mobile-responsive design with dark/light theme support"
-                            className="font-mono text-sm min-h-[120px]"
+                            className="font-mono text-sm min-h-[100px]"
                             {...field} 
                           />
                         </FormControl>
@@ -220,7 +213,7 @@ export default function AgentPlanning() {
 • Caching strategy for frequently accessed team data
 • File attachment system - should we use cloud storage or handle uploads directly?
 • Notification system architecture - push notifications vs email digests"
-                            className="font-mono text-sm min-h-[120px]"
+                            className="font-mono text-sm min-h-[100px]"
                             {...field} 
                           />
                         </FormControl>
@@ -246,7 +239,7 @@ export default function AgentPlanning() {
 • Drag-and-drop task organization with smooth animations
 • Consistent design system with subtle shadows and rounded corners
 • Fast, snappy interactions - no loading states over 200ms for core actions"
-                            className="font-mono text-sm min-h-[120px]"
+                            className="font-mono text-sm min-h-[100px]"
                             {...field} 
                           />
                         </FormControl>
@@ -258,57 +251,86 @@ export default function AgentPlanning() {
                     )}
                   />
 
-                  <div className="pt-4">
-                    <Button 
-                      type="submit" 
-                      className="font-mono text-sm"
-                      size="lg"
-                    >
-                      Generate Planning Prompt
-                    </Button>
-                  </div>
+                  {/* Generate Button - Centered when no prompt */}
+                  {!generatedPrompt && (
+                    <div className="pt-4 flex justify-center">
+                      <Button 
+                        type="submit" 
+                        className="font-mono text-sm"
+                        size="lg"
+                      >
+                        Generate Planning Prompt
+                      </Button>
+                    </div>
+                  )}
                 </form>
               </Form>
             </CardContent>
           </Card>
-        </motion.div>
 
-        {/* Generated Prompt Display */}
-        {generatedPrompt && (
-          <motion.div
-            variants={cardVariants}
-            custom={2}
-            initial="initial"
-            animate="animate"
-          >
-            <Card className="mt-8 border-0 shadow-sm bg-background/50 backdrop-blur-sm">
-              <CardHeader className="pb-4">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl font-medium font-mono tracking-tight">Your Agent Planning Prompt</CardTitle>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={copyToClipboard}
-                    className="font-mono text-xs"
+          {/* Prompt Display Panel */}
+          <Card className="border-0 shadow-sm bg-background/50 backdrop-blur-sm">
+            {generatedPrompt ? (
+              <>
+                <CardHeader className="pb-4">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-xl font-medium font-mono tracking-tight">Your Agent Planning Prompt</CardTitle>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={copyToClipboard}
+                        className="font-mono text-xs"
+                      >
+                        {copied ? <Check className="w-4 h-4 mr-1" /> : <Copy className="w-4 h-4 mr-1" />}
+                        {copied ? 'Copied!' : 'Copy'}
+                      </Button>
+                      <Button
+                        onClick={form.handleSubmit(onSubmit)}
+                        variant="outline"
+                        size="sm"
+                        className="font-mono text-xs"
+                      >
+                        Re-generate
+                      </Button>
+                    </div>
+                  </div>
+                  <CardDescription className="text-sm text-muted-foreground/90">
+                    Copy this prompt and use it with your AI agent for collaborative planning
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="bg-muted/30 rounded-lg p-4 font-mono text-sm border border-muted/50 max-h-[600px] overflow-y-auto">
+                    <pre className="whitespace-pre-wrap text-muted-foreground leading-relaxed">
+                      {generatedPrompt}
+                    </pre>
+                  </div>
+                </CardContent>
+              </>
+            ) : (
+              <CardContent className="flex items-center justify-center h-full min-h-[400px]">
+                <div className="text-center">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted/30 flex items-center justify-center">
+                    <Copy className="w-8 h-8 text-muted-foreground/50" />
+                  </div>
+                  <h3 className="font-mono text-lg font-medium text-muted-foreground mb-2">
+                    Your prompt will appear here
+                  </h3>
+                  <p className="text-sm text-muted-foreground/70 max-w-sm mb-6">
+                    Fill out the form on the left and generate your structured agent planning session.
+                  </p>
+                  <Button 
+                    onClick={form.handleSubmit(onSubmit)}
+                    className="font-mono text-sm"
+                    size="lg"
                   >
-                    {copied ? <Check className="w-4 h-4 mr-1" /> : <Copy className="w-4 h-4 mr-1" />}
-                    {copied ? 'Copied!' : 'Copy'}
+                    Generate Planning Prompt
                   </Button>
                 </div>
-                <CardDescription className="text-sm text-muted-foreground/90">
-                  Copy this prompt and use it with your AI agent for collaborative planning
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-muted/30 rounded-lg p-4 font-mono text-sm border border-muted/50">
-                  <pre className="whitespace-pre-wrap text-muted-foreground leading-relaxed">
-                    {generatedPrompt}
-                  </pre>
-                </div>
               </CardContent>
-            </Card>
-          </motion.div>
-        )}
+            )}
+          </Card>
+        </motion.div>
       </div>
     </motion.div>
   );
