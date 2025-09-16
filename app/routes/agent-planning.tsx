@@ -22,30 +22,30 @@ export default function AgentPlanning() {
       animate="animate"
       exit="exit"
     >
-      <div className="container mx-auto p-8">
+      <div className="container mx-auto px-6 py-16">
         {/* Header with icon and navigation */}
         <motion.div 
-          className="flex items-center gap-4 mb-8"
+          className="flex items-center gap-6 mb-16"
           variants={headerVariants}
         >
           <motion.div 
-            className="w-16 h-16 bg-muted rounded-lg flex items-center justify-center"
+            className="w-16 h-16 flex items-center justify-center"
             variants={iconVariants}
             whileHover="hover"
           >
             <img 
               src="/plan.svg" 
               alt="Agent planning"
-              className="w-12 h-12"
+              className="w-12 h-12 invert brightness-75 hover:brightness-100 transition-all duration-200"
             />
           </motion.div>
           <div className="flex-1">
-            <h1 className="text-4xl font-bold">Agent planning</h1>
+            <h1 className="text-4xl font-light font-mono tracking-tight">Agent planning</h1>
           </div>
           <Link to="/">
-            <Button variant="ghost" size="sm">
+            <Button variant="ghost" size="sm" className="font-mono text-sm">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Home
+              Back
             </Button>
           </Link>
         </motion.div>
@@ -55,12 +55,12 @@ export default function AgentPlanning() {
           variants={cardVariants}
           custom={0}
         >
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle>Collaborative Planning with Agents</CardTitle>
+          <Card className="mb-12 border-0 shadow-sm bg-background/50 backdrop-blur-sm">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-xl font-medium font-mono tracking-tight">Collaborative Planning with Agents</CardTitle>
             </CardHeader>
             <CardContent>
-              <CardDescription className="text-lg leading-relaxed">
+              <CardDescription className="text-base leading-relaxed text-muted-foreground/90">
                 Agent planning enables collaborative planning with AI agents through high-level specifications and mini-ADRs 
                 (Architecture Decision Records). This methodology focuses on capturing lightweight architectural decisions 
                 before coding begins, ensuring alignment between human intent and AI implementation. It's ideal for complex 
@@ -76,18 +76,18 @@ export default function AgentPlanning() {
           variants={cardVariants}
           custom={1}
         >
-          <Card>
-            <CardHeader>
-              <CardTitle>Build Your Agent Planning Prompt</CardTitle>
-              <CardDescription>
+          <Card className="border-0 shadow-sm bg-background/50 backdrop-blur-sm">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-xl font-medium font-mono tracking-tight">Build Your Agent Planning Prompt</CardTitle>
+              <CardDescription className="text-sm text-muted-foreground/90">
                 Create structured planning sessions with AI agents
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="p-8 border-2 border-dashed border-muted rounded-lg text-center">
-                  <p className="text-muted-foreground">Form will be implemented here</p>
-                  <p className="text-sm text-muted-foreground mt-2">
+                <div className="p-12 border border-dashed border-muted/50 rounded-lg text-center">
+                  <p className="text-muted-foreground font-mono text-sm">Form will be implemented here</p>
+                  <p className="text-xs text-muted-foreground/70 mt-2 max-w-md mx-auto">
                     This will include fields for project scope, architectural constraints, and decision criteria
                   </p>
                 </div>

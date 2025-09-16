@@ -1,66 +1,62 @@
 export const pageVariants = {
-  initial: { opacity: 0, y: 20 },
+  initial: { opacity: 0 },
   animate: { 
-    opacity: 1, 
-    y: 0,
+    opacity: 1,
     transition: {
-      duration: 0.6,
-      ease: "easeOut"
+      duration: 0.4,
+      ease: "easeOut" as const,
+      staggerChildren: 0.1,
+      delayChildren: 0.05
     }
   },
   exit: { 
-    opacity: 0, 
-    y: -20,
+    opacity: 0,
     transition: {
-      duration: 0.3,
-      ease: "easeIn"
+      duration: 0.2,
+      ease: "easeIn" as const
     }
   }
 };
 
 export const headerVariants = {
-  initial: { opacity: 0, x: -30 },
+  initial: { opacity: 0, y: 10 },
   animate: { 
     opacity: 1, 
-    x: 0,
+    y: 0,
     transition: {
-      duration: 0.7,
-      ease: "easeOut",
-      delay: 0.1
+      duration: 0.4,
+      ease: "easeOut" as const
     }
   }
 };
 
 export const iconVariants = {
-  initial: { scale: 0.8, rotate: -10 },
+  initial: { opacity: 0 },
   animate: { 
-    scale: 1, 
-    rotate: 0,
+    opacity: 1,
     transition: {
-      duration: 0.6,
-      ease: "easeOut",
-      delay: 0.2
+      duration: 0.4,
+      ease: "easeOut" as const
     }
   },
   hover: {
-    scale: 1.1,
-    rotate: 5,
+    y: -2,
     transition: {
-      duration: 0.3,
-      ease: "easeOut"
+      duration: 0.2,
+      ease: "easeOut" as const
     }
   }
 };
 
 export const cardVariants = {
-  initial: { opacity: 0, y: 30 },
+  initial: { opacity: 0, y: 20 },
   animate: (custom: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.6,
-      ease: "easeOut",
-      delay: 0.3 + custom * 0.2
+      duration: 0.4,
+      ease: "easeOut" as const,
+      delay: custom * 0.1
     }
   })
 };
