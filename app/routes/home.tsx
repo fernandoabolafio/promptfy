@@ -13,6 +13,13 @@ export function meta({}: Route.MetaArgs) {
 
 const promptTypes = [
   {
+    id: "agent-planning",
+    name: "Agent planning",
+    description: "Plan first, code later. Iterate on markdown specs instead of regenerating code files. Catch blind spots before they become expensive bugs.",
+    icon: "/plan.svg",
+    path: "/agent-planning"
+  },
+  {
     id: "diverge",
     name: "Diverge",
     description: "Break out of tunnel vision. Let AI explore the solution space without your assumptions, then pick the best path from approaches you'd never consider.",
@@ -25,13 +32,6 @@ const promptTypes = [
     description: "You code the seed, AI grows the tree. Show your architectural vision with working code, then get systematic help expanding it.",
     icon: "/tracerbullet.svg",
     path: "/tracer-bullet"
-  },
-  {
-    id: "agent-planning",
-    name: "Agent planning",
-    description: "Plan first, code later. Iterate on markdown specs instead of regenerating code files. Catch blind spots before they become expensive bugs.",
-    icon: "/plan.svg",
-    path: "/agent-planning"
   }
 ];
 
