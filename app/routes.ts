@@ -5,4 +5,5 @@ export default [
   route("/diverge", "routes/diverge.tsx"),
   route("/tracer-bullet", "routes/tracer-bullet.tsx"),
   route("/agent-planning", "routes/agent-planning.tsx"),
+  route("/social", "routes/social.tsx"),
 ] satisfies RouteConfig;
